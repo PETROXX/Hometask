@@ -215,8 +215,8 @@ GameObject:
   m_Component:
   - component: {fileID: 592867714}
   m_Layer: 0
-  m_Name: Spawnpoint
-  m_TagString: Untagged
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,8 +421,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1415102013}
   m_Layer: 0
-  m_Name: Spawnpoint2
-  m_TagString: Untagged
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,8 +451,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1458557543}
   m_Layer: 0
-  m_Name: Spawnpoint1
-  m_TagString: Untagged
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -481,8 +481,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1768147094}
   m_Layer: 0
-  m_Name: Spawnpoint4
-  m_TagString: Untagged
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -511,8 +511,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1866273667}
   m_Layer: 0
-  m_Name: Spawnpoint3
-  m_TagString: Untagged
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

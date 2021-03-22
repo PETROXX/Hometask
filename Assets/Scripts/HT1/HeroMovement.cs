@@ -12,6 +12,7 @@ public class HeroMovement: MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _speed = 100;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _jumpForce;
 
     private void Update()
     {
@@ -24,11 +25,11 @@ public class HeroMovement: MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             _animator.SetBool("IsAttacking", true);
-            StartCoroutine(wait(_attackAnimation.length));
+            StartCoroutine(Wait(_attackAnimation.length));
         }
     }
 
-    IEnumerator wait(float timeToWait)
+    IEnumerator Wait(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
         _animator.SetBool("IsAttacking", false);
@@ -37,30 +38,16 @@ public class HeroMovement: MonoBehaviour
     private void FixedUpdate()
     {
         float x = Input.GetAxis("Horizontal");
-        if (x < 0) _spriteRenderer.flipX = true;
-        else _spriteRenderer.flipX = false;
+        if (x < 0)
+            _spriteRenderer.flipX = true;
+        else
+            _spriteRenderer.flipX = false;
         _playerRig.velocity = new Vector2(x * _speed, _playerRig.velocity.y);
         _animator.SetBool("IsRunning", _playerRig.velocity.x != 0.0);
     }
 
     private void Jump()
     {
-        _playerRig.AddForce(new Vector2(1, 300));
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.TryGetComponent<Signaling>(out Signaling signaling))
-        {
-            signaling.RaiseAlarm();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Signaling>(out Signaling signaling))
-        {
-            signaling.StopSignal();
-        }
+        _playerRig.AddForce(new Vector2(1, _jumpForce));
     }
 }

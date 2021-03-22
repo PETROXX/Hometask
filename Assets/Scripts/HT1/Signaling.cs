@@ -6,12 +6,12 @@ public class Signaling : MonoBehaviour
 {
     [SerializeField] private AudioSource _playerSource;
     [SerializeField] private AudioClip _signalingSound;
+    [SerializeField] private float _volumeIncreaseStep;
     [SerializeField] private UnityEvent _alarmRaised;
-    [SerializeField] private float _signalingPeriod;
-    [SerializeField] private VolumeVariatns VolumeVariant;
-    [SerializeField] private bool _isSignalPlaying;
 
-    private float _timer;
+    private VolumeVariatns VolumeVariant;
+    private bool _isSignalPlaying;
+    private float _volume;
 
     public event UnityAction AlarmRaised
     {
@@ -31,6 +31,25 @@ public class Signaling : MonoBehaviour
         _playerSource.volume = 0;
     }
 
+    private void Update()
+    {
+        if(_isSignalPlaying)
+        {
+            if (VolumeVariant == VolumeVariatns.Increasing)
+            {
+                _volume = Mathf.MoveTowards(_volume, 1, _volumeIncreaseStep * Time.deltaTime);
+                if (_volume >= 1) VolumeVariant = VolumeVariatns.Decreasing;
+            }
+            else
+            {
+                _volume = Mathf.MoveTowards(_volume, 0, _volumeIncreaseStep * Time.deltaTime);
+                if (_volume <= 0.1) VolumeVariant = VolumeVariatns.Increasing;
+            }
+            _playerSource.volume = _volume;
+            _playerSource.Play();
+        }
+    }
+
     public void RaiseAlarm()
     {
         _playerSource.clip = _signalingSound;
@@ -40,7 +59,7 @@ public class Signaling : MonoBehaviour
     public void PlaySignal()
     {
         _isSignalPlaying = true;
-        StartCoroutine(PlaySignalCoroutine());
+        //StartCoroutine(PlaySignalCoroutine());
     }
 
     public void StopSignal()
@@ -50,24 +69,15 @@ public class Signaling : MonoBehaviour
         _playerSource.volume = 0;
     }
 
-    private IEnumerator PlaySignalCoroutine()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_isSignalPlaying)
-        {
-            if (VolumeVariant == VolumeVariatns.Increasing)
-            {
-                _playerSource.volume += 0.1f;
-                if (_playerSource.volume >= 1) VolumeVariant = VolumeVariatns.Decreasing;
-            }
-            else
-            {
-                _playerSource.volume -= 0.1f;
-                if (_playerSource.volume <= 0.1) VolumeVariant = VolumeVariatns.Increasing;
-            }
-            _playerSource.Play();
-            yield return new WaitForSeconds(_signalingPeriod / 10);
-            _timer += _signalingPeriod / 10;
-            StartCoroutine(PlaySignalCoroutine());
-        }
+        if (collision.tag == "Player")
+            RaiseAlarm();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+            StopSignal();
     }
 }
