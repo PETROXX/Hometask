@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Ground
   - Coin
-  - SpawnPoint
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX
