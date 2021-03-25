@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerAnimation))]
+[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _coins;
@@ -18,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Coin")
+        if(collision.TryGetComponent<Coin>(out Coin coin))
         {
             _coins++;
             Destroy(collision.gameObject);
@@ -33,7 +38,8 @@ public class Player : MonoBehaviour
             _playerAnimation.DeathAnimation();
         }
         GetComponent<PlayerMovement>().enabled = false;
-        if (!GetComponent<PlayerMovement>().IsGrounded) GetComponent<PlayerMovement>().MovePlayerToGround();
+        if (!GetComponent<PlayerMovement>().IsGrounded)
+            GetComponent<PlayerMovement>().MovePlayerToGround();
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<BoxCollider2D>().isTrigger = true;
     }

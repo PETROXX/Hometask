@@ -367,6 +367,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3789642732347306922, guid: 77db4bfbb1d186f4ba04c4a0f226e9e8, type: 3}
+      propertyPath: _damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789642732347306922, guid: 77db4bfbb1d186f4ba04c4a0f226e9e8, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1159082400741158267, guid: 77db4bfbb1d186f4ba04c4a0f226e9e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 77db4bfbb1d186f4ba04c4a0f226e9e8, type: 3}
@@ -468,6 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 729926459}
   - component: {fileID: 729926460}
+  - component: {fileID: 729926461}
   m_Layer: 0
   m_Name: PatrolPoint
   m_TagString: PatrolPoint
@@ -505,6 +514,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &729926461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729926458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f275201db7ff24188860b198c7f633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &780143596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2056614598949395443, guid: c719b35fa08621246a9062bc5aa07fa6, type: 3}
@@ -2171,26 +2192,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.024888635}
   m_EdgeRadius: 0
---- !u!1 &1573084647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1159082400097463153, guid: 77db4bfbb1d186f4ba04c4a0f226e9e8, type: 3}
-  m_PrefabInstance: {fileID: 613079555}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1573084655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573084647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab9d0293bf44e445816bf386b143d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coins: 0
-  _health: 100
-  _damage: 10
 --- !u!1001 &1650268256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2268,6 +2269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656796527}
   - component: {fileID: 1656796528}
+  - component: {fileID: 1656796529}
   m_Layer: 0
   m_Name: PatrolPoint
   m_TagString: PatrolPoint
@@ -2305,6 +2307,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1656796529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656796526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f275201db7ff24188860b198c7f633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1659804438
 PrefabInstance:
   m_ObjectHideFlags: 0

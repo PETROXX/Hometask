@@ -1,5 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PlayerAnimation))]
+
 public class PlayerMovement: MonoBehaviour
 {
     [SerializeField] private Transform _groundCheck;
