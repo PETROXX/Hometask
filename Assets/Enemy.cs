@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private Animator _anim;
     private int _patrolPointIndex = 0;
     private Player _player;
+    private bool _isAttacking;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _attackRange;
@@ -43,7 +44,10 @@ public class Enemy : MonoBehaviour
 
     private void DetectPlayer()
     {
-        if (Vector2.Distance(transform.position, _player.transform.position) < _attackRange) _anim.SetTrigger("Attack");
+        if (Vector2.Distance(transform.position, _player.transform.position) < _attackRange)
+        {
+            _player.Die();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

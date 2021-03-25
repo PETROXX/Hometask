@@ -46,4 +46,9 @@ public class PlayerMovement: MonoBehaviour
     {
         _playerRig.AddForce(new Vector2(0, _jumpForce));
     }
+
+    public void MovePlayerToGround()
+    {
+        transform.position = new Vector2(transform.position.x, -2);
+    }
 }
