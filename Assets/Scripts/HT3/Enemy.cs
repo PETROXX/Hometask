@@ -1,7 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 
 public class Enemy : MonoBehaviour
 {
@@ -32,26 +35,30 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        if (_patrolPointIndex >= _patrolPoints.Count) return;
-        _rb.AddForce((_patrolPoints[_patrolPointIndex].transform.position - transform.position) * Time.deltaTime * _speed); // get move direction 
+        if (_patrolPointIndex >= _patrolPoints.Count)
+            return;
+
+        _rb.AddForce((_patrolPoints[_patrolPointIndex].transform.position - transform.position) * Time.deltaTime * _speed);
         _spriteRenderer.flipX = _rb.velocity.x > 0;
-        if (_rb.velocity.x != 0) _anim.SetInteger("AnimState", 2); // run animation
+
+        if (_rb.velocity.x != 0)
+            _anim.SetInteger("AnimState", 2);
     }
 
     private void DetectPlayer()
     {
         if (Vector2.Distance(transform.position, _player.transform.position) < _attackRange)
-        {
             _player.Die();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.TryGetComponent<PatrolPoint>(out PatrolPoint patrolPoint))
         {
-            if (_patrolPointIndex < _patrolPoints.Count) _patrolPointIndex++;
-            else _patrolPointIndex = 0;
+            if (_patrolPointIndex < _patrolPoints.Count)
+                _patrolPointIndex++;
+            else
+                _patrolPointIndex = 0;
         }
     }
 }
