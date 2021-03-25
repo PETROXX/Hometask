@@ -8,7 +8,7 @@ using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
-    private Rigidbody2D _rb;
+    private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _anim;
     private int _patrolPointIndex = 0;
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<Player>();
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         _patrolPoints = FindObjectsOfType<PatrolPoint>().ToList();
@@ -38,10 +38,10 @@ public class Enemy : MonoBehaviour
         if (_patrolPointIndex >= _patrolPoints.Count)
             return;
 
-        _rb.AddForce((_patrolPoints[_patrolPointIndex].transform.position - transform.position) * Time.deltaTime * _speed);
-        _spriteRenderer.flipX = _rb.velocity.x > 0;
+        _rigidbody2D.AddForce((_patrolPoints[_patrolPointIndex].transform.position - transform.position) * Time.deltaTime * _speed);
+        _spriteRenderer.flipX = _rigidbody2D.velocity.x > 0;
 
-        if (_rb.velocity.x != 0)
+        if (_rigidbody2D.velocity.x != 0)
             _anim.SetInteger("AnimState", 2);
     }
 
