@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 345366784}
   - component: {fileID: 345366783}
   m_Layer: 5
-  m_Name: +10HP_bttn
+  m_Name: -10HP_bttn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,8 +417,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 913216900}
-        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+      - m_Target: {fileID: 913216902}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: MinusHP
         m_Mode: 4
         m_Arguments:
@@ -669,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 913216901}
   - component: {fileID: 913216900}
+  - component: {fileID: 913216902}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -688,10 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444df59af8420974bb25caec7f1de6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 100
   _slider: {fileID: 422236075}
-  _health: 0
-  _changeSpeed: 10
   _hpText: {fileID: 239547035}
 --- !u!4 &913216901
 Transform:
@@ -707,6 +705,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &913216902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913216899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ba9513e7f352e489dadf268a721b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 100
+  _currentHP: 0
+  _changeSpeed: 10
 --- !u!1 &962212859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1026,7 @@ GameObject:
   - component: {fileID: 1385351606}
   - component: {fileID: 1385351605}
   m_Layer: 5
-  m_Name: -10HP_bttn
+  m_Name: +10HP_bttn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1083,8 +1096,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 913216900}
-        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+      - m_Target: {fileID: 913216902}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: PlusHP
         m_Mode: 4
         m_Arguments:
