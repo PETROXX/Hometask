@@ -11,14 +11,14 @@ public class HealthBar : MonoBehaviour
 
     private Health _health;
 
+    public bool IsHealthChanging;
+
     private void Start()
     {
         _health = GetComponent<Health>();
-        _slider.value = _health.HP;
-        _hpText.text = $"{(int)_health.HP}";
     }
 
-    private void Update()
+    public void UpdateUI()
     {
         _slider.value = _health.HP;
         _hpText.text = $"{(int)_health.HP}";
