@@ -2,25 +2,29 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(PlayerHealth))]
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TMP_Text _hpText;
 
-    private Health _health;
-
-    public bool IsHealthChanging;
+    private PlayerHealth _playerHealth;
 
     private void Start()
     {
-        _health = GetComponent<Health>();
+        _playerHealth = GetComponent<PlayerHealth>();
+    }
+
+    private void Update()
+    {
+        if (_playerHealth.IsHealthChanging)
+            UpdateUI();
     }
 
     public void UpdateUI()
     {
-        _slider.value = _health.HP;
-        _hpText.text = $"{(int)_health.HP}";
+        _slider.value = _playerHealth.Health;
+        _hpText.text = $"{(int)_playerHealth.Health}";
     }
 }

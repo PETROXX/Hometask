@@ -2,33 +2,30 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthBar))]
 
-public class Health : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float _maxHP;
-    [SerializeField] private float _currentHP;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _currentHealth;
     [SerializeField] private float _changeSpeed;
 
-    private HealthBar _healthBar;
     private bool _isHPChanging;
     private float _aimhp;
 
-    public float HP { get => _currentHP; }
+    public float Health { get => _currentHealth; }
+    public bool IsHealthChanging => _isHPChanging;
 
     private void Start()
     {
-        _healthBar = GetComponent<HealthBar>();
-        _currentHP = _maxHP;
-        _aimhp = _currentHP;
-        _healthBar.UpdateUI();
+        _currentHealth = _maxHealth;
+        _aimhp = _currentHealth;
     }
 
     private void Update()
     {
         if (_isHPChanging)
         {
-            _currentHP = Mathf.MoveTowards(_currentHP, _aimhp, _changeSpeed * Time.deltaTime);
-            _healthBar.UpdateUI();
-            if (_currentHP == _aimhp)
+            _currentHealth = Mathf.MoveTowards(_currentHealth, _aimhp, _changeSpeed * Time.deltaTime);
+            if (_currentHealth == _aimhp)
             {
                 _isHPChanging = false;
             }
@@ -37,7 +34,7 @@ public class Health : MonoBehaviour
 
     public void PlusHP(float hp)
     {
-        if (_currentHP + hp > _maxHP)
+        if (_currentHealth + hp > _maxHealth)
             return;
 
         _isHPChanging = true;
@@ -46,7 +43,7 @@ public class Health : MonoBehaviour
 
     public void MinusHP(float hp)
     {
-        if (_currentHP - hp < 0)
+        if (_currentHealth - hp < 0)
             return;
 
         _isHPChanging = true;
