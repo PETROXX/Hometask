@@ -8,6 +8,9 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private float _changeSpeed;
+
+    private bool _isHpChanging;
 
     private PlayerHealth _playerHealth;
 
@@ -18,13 +21,17 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        if (_playerHealth.IsHealthChanging)
-            UpdateUI();
+        if (_isHpChanging)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, _playerHealth.CurrentHealth, _changeSpeed);
+            if (_slider.value == _playerHealth.CurrentHealth)
+                _isHpChanging = false;
+        }
     }
 
-    public void UpdateUI()
+    public void ChangeHealthBar()
     {
-        _slider.value = _playerHealth.Health;
-        _hpText.text = $"{(int)_playerHealth.Health}";
+        _isHpChanging = true;
+        _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
     }
 }

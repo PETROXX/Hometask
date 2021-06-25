@@ -691,6 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slider: {fileID: 422236075}
   _hpText: {fileID: 239547035}
+  _changeSpeed: 0.35
 --- !u!4 &913216901
 Transform:
   m_ObjectHideFlags: 0
@@ -718,8 +719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _currentHealth: 0
-  _changeSpeed: 10
 --- !u!1 &962212859
 GameObject:
   m_ObjectHideFlags: 0
