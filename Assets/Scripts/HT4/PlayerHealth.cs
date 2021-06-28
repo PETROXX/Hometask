@@ -8,14 +8,11 @@ public class PlayerHealth : MonoBehaviour
 
     private float _currentHealth;
 
-    private HealthBar _healthBar;
-
     public float CurrentHealth => _currentHealth;
 
     private void Start()
     {
         _currentHealth = _maxHealth;
-        _healthBar = GetComponent<HealthBar>();
     }
 
 
@@ -25,8 +22,6 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         _currentHealth += hp;
-
-        _healthBar.ChangeHealthBar();
     }
 
     public void MinusHP(float hp)
@@ -35,7 +30,5 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         _currentHealth -= hp;
-
-        _healthBar.ChangeHealthBar();
     }
 }

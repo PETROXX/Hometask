@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 [RequireComponent(typeof(PlayerHealth))]
 
@@ -10,8 +11,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private float _changeSpeed;
 
-    private bool _isHpChanging;
-
     private PlayerHealth _playerHealth;
 
     private void Start()
@@ -19,19 +18,18 @@ public class HealthBar : MonoBehaviour
         _playerHealth = GetComponent<PlayerHealth>();
     }
 
-    private void Update()
-    {
-        if (_isHpChanging)
-        {
-            _slider.value = Mathf.MoveTowards(_slider.value, _playerHealth.CurrentHealth, _changeSpeed);
-            if (_slider.value == _playerHealth.CurrentHealth)
-                _isHpChanging = false;
-        }
-    }
-
     public void ChangeHealthBar()
     {
-        _isHpChanging = true;
         _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
+        StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+    }
+
+    public IEnumerator ChangeSliderValue(float aimValue)
+    {
+        do
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, aimValue, _changeSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
+        } while (_slider.value != aimValue);
     }
 }
