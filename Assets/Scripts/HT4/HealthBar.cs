@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
         do
         {
             _slider.value = Mathf.MoveTowards(_slider.value, aimValue, _changeSpeed);
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         } while (_slider.value != aimValue);
     }
 }

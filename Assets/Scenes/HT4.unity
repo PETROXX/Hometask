@@ -703,7 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slider: {fileID: 422236075}
   _hpText: {fileID: 239547035}
-  _changeSpeed: 0.35
+  _changeSpeed: 0.15
 --- !u!4 &913216901
 Transform:
   m_ObjectHideFlags: 0
