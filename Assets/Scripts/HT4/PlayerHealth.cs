@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(HealthBar))]
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
+
+    [SerializeField] private UnityEvent _healthChanged;
 
     private float _currentHealth;
 
@@ -22,6 +25,8 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         _currentHealth += hp;
+
+        _healthChanged.Invoke();
     }
 
     public void MinusHP(float hp)
@@ -30,5 +35,6 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         _currentHealth -= hp;
+        _healthChanged.Invoke();
     }
 }

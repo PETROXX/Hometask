@@ -2,7 +2,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerHealth))]
 
@@ -12,22 +11,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private float _changeSpeed;
 
-    private UnityEvent _buttonPressed;
     private PlayerHealth _playerHealth;
 
     private void Start()
     {
         _playerHealth = GetComponent<PlayerHealth>();
-
-        if (_buttonPressed == null)
-            _buttonPressed = new UnityEvent();
-
-        _buttonPressed.AddListener(ChangeHealthBar);
     }
 
-    public void ButtonPressed()
+    public void OnButtonPressed()
     {
-        _buttonPressed.Invoke();
+        ChangeHealthBar();
     }
 
     private void ChangeHealthBar()
