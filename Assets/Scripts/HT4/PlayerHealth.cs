@@ -7,17 +7,18 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
 
-    [SerializeField] private UnityEvent _healthChanged;
-
     private float _currentHealth;
+
+    private UnityEvent _healthChanged;
 
     public float CurrentHealth => _currentHealth;
 
     private void Start()
     {
         _currentHealth = _maxHealth;
+        _healthChanged = new UnityEvent();
+        _healthChanged.AddListener(FindObjectOfType<HealthBar>().OnButtonPressed);
     }
-
 
     public void PlusHP(float hp)
     {
