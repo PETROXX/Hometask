@@ -17,6 +17,7 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerHealth.HealthChanged += OnButtonPressed;
     }
 
     public void OnButtonPressed()
@@ -29,18 +30,26 @@ public class HealthBar : MonoBehaviour
         _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
 
         if(!_isCoroutineRunning)
-            StartCoroutine(ChangeSliderValue());
+        {
+            StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+        }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+        }
     }
 
-    private IEnumerator ChangeSliderValue()
+    private IEnumerator ChangeSliderValue(float value)
     {
         _isCoroutineRunning = true;
+        print(value);
 
         do
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, _playerHealth.CurrentHealth, _changeSpeed);
+            _slider.value = Mathf.MoveTowards(_slider.value, value, _changeSpeed);
             yield return null;
-        } while (_slider.value != _playerHealth.CurrentHealth);
+        } while (_slider.value != value);
 
         _isCoroutineRunning = false;
     }
