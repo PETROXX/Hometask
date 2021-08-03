@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float CurrentHealth => _currentHealth;
 
-    public event Action HealthChanged;
+    public event UnityAction HealthChanged;
 
     private void Start()
     {

@@ -3,20 +3,17 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-[RequireComponent(typeof(PlayerHealth))]
-
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private float _changeSpeed;
+    [SerializeField] private PlayerHealth _playerHealth;
 
-    private PlayerHealth _playerHealth;
-    private bool _isCoroutineRunning;
+    private IEnumerator _changeSliderValue;
 
     private void Start()
     {
-        _playerHealth = GetComponent<PlayerHealth>();
         _playerHealth.HealthChanged += OnButtonPressed;
     }
 
@@ -29,20 +26,20 @@ public class HealthBar : MonoBehaviour
     {
         _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
 
-        if(!_isCoroutineRunning)
+        if (_changeSliderValue == null)
         {
-            StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+            _changeSliderValue = ChangeSliderValue(_playerHealth.CurrentHealth);
+            StartCoroutine(_changeSliderValue);
         }
         else
         {
-            StopAllCoroutines();
-            StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+            _changeSliderValue = ChangeSliderValue(_playerHealth.CurrentHealth);
+            StartCoroutine(_changeSliderValue);
         }
     }
 
     private IEnumerator ChangeSliderValue(float value)
     {
-        _isCoroutineRunning = true;
         print(value);
 
         do
@@ -51,6 +48,6 @@ public class HealthBar : MonoBehaviour
             yield return null;
         } while (_slider.value != value);
 
-        _isCoroutineRunning = false;
+        _changeSliderValue = null;
     }
 }
