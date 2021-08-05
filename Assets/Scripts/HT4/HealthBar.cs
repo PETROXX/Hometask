@@ -14,22 +14,22 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        _playerHealth.OnHealthChanged += OnButtonPressed;
+        _playerHealth.HealthChanged += OnHealthChanged;
     }
 
-    public void OnButtonPressed()
+    public void OnHealthChanged(float playerHealth)
     {
-        ChangeHealthBar();
+        ChangeHealthBar(playerHealth);
     }
 
-    private void ChangeHealthBar()
+    private void ChangeHealthBar(float playerHealth)
     {
-        _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
+        _hpText.text = $"{(int)playerHealth}";
 
         if (_changeSliderValue != null)
             StopCoroutine(_changeSliderValue);
 
-        _changeSliderValue = StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
+        _changeSliderValue = StartCoroutine(ChangeSliderValue(playerHealth));
     }
 
     private IEnumerator ChangeSliderValue(float value)

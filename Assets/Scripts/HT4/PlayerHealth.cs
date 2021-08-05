@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float CurrentHealth => _currentHealth;
 
-    public event UnityAction OnHealthChanged;
+    public event UnityAction<float> HealthChanged;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
         _currentHealth += hp;
 
-        OnHealthChanged.Invoke();
+        HealthChanged.Invoke(_currentHealth);
     }
 
     public void GeDamage(float hp)
@@ -33,6 +33,6 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         _currentHealth -= hp;
-        OnHealthChanged.Invoke();
+        HealthChanged.Invoke(_currentHealth);
     }
 }
