@@ -10,11 +10,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _changeSpeed;
     [SerializeField] private PlayerHealth _playerHealth;
 
-    private IEnumerator _changeSliderValue;
+    private Coroutine _changeSliderValue;
 
     private void Start()
     {
-        _playerHealth.HealthChanged += OnButtonPressed;
+        _playerHealth.OnHealthChanged += OnButtonPressed;
     }
 
     public void OnButtonPressed()
@@ -26,28 +26,18 @@ public class HealthBar : MonoBehaviour
     {
         _hpText.text = $"{(int)_playerHealth.CurrentHealth}";
 
-        if (_changeSliderValue == null)
-        {
-            _changeSliderValue = ChangeSliderValue(_playerHealth.CurrentHealth);
-            StartCoroutine(_changeSliderValue);
-        }
-        else
-        {
-            _changeSliderValue = ChangeSliderValue(_playerHealth.CurrentHealth);
-            StartCoroutine(_changeSliderValue);
-        }
+        if (_changeSliderValue != null)
+            StopCoroutine(_changeSliderValue);
+
+        _changeSliderValue = StartCoroutine(ChangeSliderValue(_playerHealth.CurrentHealth));
     }
 
     private IEnumerator ChangeSliderValue(float value)
     {
-        print(value);
-
         do
         {
             _slider.value = Mathf.MoveTowards(_slider.value, value, _changeSpeed);
             yield return null;
         } while (_slider.value != value);
-
-        _changeSliderValue = null;
     }
 }
